@@ -1,0 +1,217 @@
+import { User, Post, Comment, Vote, Subscription } from './types'
+
+// Mock users data
+export const mockUsers: Record<string, User> = {
+  'user-1': {
+    id: 'user-1',
+    username: 'alex_dev',
+    email: 'alex@example.com',
+    avatar: '👨‍💻',
+    bio: 'Full-stack developer and open source enthusiast',
+    totalUpvotes: 2480,
+    totalPosts: 34,
+    joinedDate: new Date('2023-01-15'),
+    isPremium: true,
+    score: 2480,
+  },
+  'user-2': {
+    id: 'user-2',
+    username: 'sarah_design',
+    email: 'sarah@example.com',
+    avatar: '👩‍🎨',
+    bio: 'UX/UI Designer passionate about accessibility',
+    totalUpvotes: 1890,
+    totalPosts: 28,
+    joinedDate: new Date('2023-03-22'),
+    isPremium: true,
+    score: 1890,
+  },
+  'user-3': {
+    id: 'user-3',
+    username: 'john_tech',
+    email: 'john@example.com',
+    avatar: '👨‍🔬',
+    bio: 'Tech writer and startup advisor',
+    totalUpvotes: 1650,
+    totalPosts: 45,
+    joinedDate: new Date('2023-02-10'),
+    isPremium: false,
+    score: 1650,
+  },
+  'user-4': {
+    id: 'user-4',
+    username: 'emma_artist',
+    email: 'emma@example.com',
+    avatar: '🎨',
+    bio: 'Digital artist exploring AI and creativity',
+    totalUpvotes: 1200,
+    totalPosts: 19,
+    joinedDate: new Date('2023-06-01'),
+    isPremium: false,
+    score: 1200,
+  },
+  'user-5': {
+    id: 'user-5',
+    username: 'mike_creator',
+    email: 'mike@example.com',
+    avatar: '🚀',
+    bio: 'Entrepreneur building cool products',
+    totalUpvotes: 980,
+    totalPosts: 12,
+    joinedDate: new Date('2023-08-15'),
+    isPremium: false,
+    score: 980,
+  },
+}
+
+// Mock posts data
+export const mockPosts: Post[] = [
+  {
+    id: 'post-1',
+    authorId: 'user-1',
+    author: mockUsers['user-1'],
+    title: 'React 19 Game Changer: New Features Explained',
+    content:
+      'React 19 introduces several revolutionary features that will change how we build applications. Let\'s dive into the most impactful ones...',
+    category: 'Technology',
+    upvotes: 342,
+    downvotes: 12,
+    commentCount: 28,
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+    isValidated: true,
+    isPremiumOnly: false,
+  },
+  {
+    id: 'post-2',
+    authorId: 'user-2',
+    author: mockUsers['user-2'],
+    title: 'The Future of Web Design: Trends for 2024',
+    content:
+      'As we head into 2024, the design landscape continues to evolve. Here are the key trends you should watch out for this year...',
+    category: 'Design',
+    upvotes: 285,
+    downvotes: 8,
+    commentCount: 34,
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+    isValidated: true,
+    isPremiumOnly: false,
+  },
+  {
+    id: 'post-3',
+    authorId: 'user-3',
+    author: mockUsers['user-3'],
+    title: 'How to Build a Sustainable Startup',
+    content:
+      'Building a startup is challenging, but sustainability is key. In this guide, I\'ll share lessons learned from 10 years in tech...',
+    category: 'Business',
+    upvotes: 256,
+    downvotes: 15,
+    commentCount: 42,
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+    isValidated: true,
+    isPremiumOnly: true,
+  },
+  {
+    id: 'post-4',
+    authorId: 'user-4',
+    author: mockUsers['user-4'],
+    title: 'AI Art: Collaboration or Replacement?',
+    content:
+      'The rise of AI in creative industries sparks important questions. Is AI a tool for collaboration or a threat to creative professionals?',
+    category: 'Art & AI',
+    upvotes: 198,
+    downvotes: 45,
+    commentCount: 67,
+    createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000),
+    isValidated: true,
+    isPremiumOnly: false,
+  },
+  {
+    id: 'post-5',
+    authorId: 'user-5',
+    author: mockUsers['user-5'],
+    title: 'Launching ProductX: Our Journey to MVP',
+    content:
+      'After 6 months of development, we\'re excited to share our journey building ProductX. Here\'s what we learned along the way...',
+    category: 'Startups',
+    upvotes: 167,
+    downvotes: 5,
+    commentCount: 23,
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+    isValidated: true,
+    isPremiumOnly: false,
+  },
+]
+
+// Mock comments data
+export const mockComments: Comment[] = [
+  {
+    id: 'comment-1',
+    postId: 'post-1',
+    authorId: 'user-2',
+    author: mockUsers['user-2'],
+    content: 'Great breakdown! React 19 really is a game changer for how we handle state.',
+    upvotes: 45,
+    downvotes: 2,
+    createdAt: new Date(Date.now() - 1.5 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 1.5 * 24 * 60 * 60 * 1000),
+  },
+  {
+    id: 'comment-2',
+    postId: 'post-2',
+    authorId: 'user-1',
+    author: mockUsers['user-1'],
+    content: 'The design trends section is spot on. Minimalism is definitely making a comeback.',
+    upvotes: 38,
+    downvotes: 1,
+    createdAt: new Date(Date.now() - 0.5 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 0.5 * 24 * 60 * 60 * 1000),
+  },
+]
+
+// Mock votes data
+export const mockVotes: Vote[] = [
+  {
+    id: 'vote-1',
+    userId: 'user-1',
+    postId: 'post-2',
+    commentId: null,
+    voteType: 'upvote',
+    createdAt: new Date(),
+  },
+  {
+    id: 'vote-2',
+    userId: 'user-2',
+    postId: 'post-1',
+    commentId: null,
+    voteType: 'upvote',
+    createdAt: new Date(),
+  },
+]
+
+// Mock subscriptions data
+export const mockSubscriptions: Subscription[] = [
+  {
+    id: 'sub-1',
+    userId: 'user-1',
+    tier: 'premium',
+    startDate: new Date('2024-01-15'),
+    endDate: new Date('2025-01-15'),
+    isActive: true,
+    paymentMethod: 'stripe',
+  },
+  {
+    id: 'sub-2',
+    userId: 'user-2',
+    tier: 'premium',
+    startDate: new Date('2024-02-01'),
+    endDate: new Date('2025-02-01'),
+    isActive: true,
+    paymentMethod: 'paypal',
+  },
+]
